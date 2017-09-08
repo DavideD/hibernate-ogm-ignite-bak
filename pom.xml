@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.hibernate.ogm</groupId>
         <artifactId>hibernate-ogm-bom</artifactId>
-        <version>5.2.0-SNAPSHOT</version>
+        <version>5.2.0.Alpha1</version>
     </parent>
 
     <artifactId>hibernate-ogm-ignite-parent</artifactId>
@@ -20,15 +20,16 @@
     <name>Hibernate OGM Contrib Aggregator</name>
     <description>Hibernate OGM Contrib Aggregator POM</description>
 
-    <modules>
+    <modules>        
         <module>ignite</module>
+        <module>modules</module>
     </modules>
 
     <properties>
         <!-- JDK version required to build OGM; requiring 1.8 as WildFly 10 requires JDK 1.8; We still create
              1.7 byte code to run in other environments -->
         <minJdkVersion>1.8</minJdkVersion>
-        <jdkTargetForProcessor>1.7</jdkTargetForProcessor>
+        <jdkTargetForProcessor>1.8</jdkTargetForProcessor>
         <!-- test / build-only dependency versions, managed below -->
         <jbossNamingVersion>7.1.0.Final</jbossNamingVersion>
         <shrinkwrapVersion>1.2.2</shrinkwrapVersion>
@@ -58,6 +59,9 @@
         <jruby.version>1.7.26</jruby.version>
         <asciidoctorj.version>1.5.4.1</asciidoctorj.version>
         <asciidoctorj-pdf.version>1.5.0-alpha.11</asciidoctorj-pdf.version>
+
+        <!--Apache Ignite -->
+        <ignite.version>2.1.0</ignite.version>
     </properties>
 
     <!-- Only for management of test-scoped dependencies; All other dependencies (which are exposed to users) are
@@ -207,8 +211,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <showWarnings>true</showWarnings>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${minJdkVersion}</source>
+                    <target>${jdkTargetForProcessor}</target>
                     <encoding>UTF-8</encoding>
                     <!-- Annotation processor is run as an independent step -->
                     <proc>none</proc>
