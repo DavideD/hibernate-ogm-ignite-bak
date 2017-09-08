@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #
 # Hibernate OGM, Domain model persistence for NoSQL datastores
 #
@@ -5,4 +6,6 @@
 # See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
 #
 
+=======
+>>>>>>> 4970f1d65... the commit contains :
 org.hibernate.ogm.datastore.ignite.utils.IgniteTestHelper

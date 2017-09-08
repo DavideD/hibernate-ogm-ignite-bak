@@ -37,6 +37,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>hibernate-ogm-ignite</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
