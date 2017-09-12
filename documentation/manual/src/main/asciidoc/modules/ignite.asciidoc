@@ -47,7 +47,7 @@ To use this property add following module:
 <dependency>
     <groupId>org.apache.ignite</groupId>
     <artifactId>ignite-spring</artifactId>
-    <version>${ignite.version}</version>
+    <version>${igniteVersion}</version>
 </dependency>
 ----
 

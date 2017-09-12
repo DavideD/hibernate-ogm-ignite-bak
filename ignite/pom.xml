@@ -118,7 +118,6 @@
             <scope>test</scope>
         </dependency>
 
-	<dependencies>
 		<dependency>
 			<groupId>org.hibernate.ogm</groupId>
 			<artifactId>hibernate-ogm-core</artifactId>
@@ -129,6 +128,7 @@
 			<!-- "provided" is used as "compile-only" here; It's NOT needed at runtime -->
 			<scope>provided</scope>
 		</dependency>
+		
 
 		<!-- test dependencies -->
 		<dependency>
@@ -212,23 +212,23 @@
 		<dependency>
 			<groupId>org.apache.ignite</groupId>
 			<artifactId>ignite-core</artifactId>
-			<version>${ignite.version}</version>
+			<version>${igniteVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ignite</groupId>
 			<artifactId>ignite-jta</artifactId>
-			<version>${ignite.version}</version>
+			<version>${igniteVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ignite</groupId>
 			<artifactId>ignite-slf4j</artifactId>
-			<version>${ignite.version}</version>
+			<version>${igniteVersion}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.ignite</groupId>
 			<artifactId>ignite-indexing</artifactId>
-			<version>${ignite.version}</version>
+			<version>${igniteVersion}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.h2database</groupId>
