@@ -41,7 +41,6 @@ import org.hibernate.ogm.query.spi.QueryParserService;
 import org.hibernate.ogm.util.configurationreader.spi.ConfigurationPropertyReader;
 import org.hibernate.resource.transaction.TransactionCoordinatorBuilder;
 import org.hibernate.service.spi.Configurable;
-import org.hibernate.service.spi.ServiceException;
 import org.hibernate.service.spi.ServiceRegistryAwareService;
 import org.hibernate.service.spi.ServiceRegistryImplementor;
 import org.hibernate.service.spi.Startable;
@@ -206,24 +205,18 @@ implements Startable, Stoppable, ServiceRegistryAwareService, Configurable {
 								.required().getValue();
 						log.infof( "workDirectory: %s",workDirectory  );
 						conf.setWorkDirectory( workDirectory );
-
-
 						conf.setPersistentStoreConfiguration( persistentStoreConfiguration );
-						conf.setActiveOnStart( true );
 					}
-
 
 					cacheManager = (IgniteEx) Ignition.start( conf );
 					log.info( "== New instance of Ignite started ==" );
 					if ( usePersistence ) {
+						//call "active(false)" throws exception. it is question for Ignite team
 						cacheManager.active( true );
 					}
 					stopOnExit = true;
 				}
 			}
-		}
-		catch (ServiceException ex) {
-			throw ex;
 		}
 		catch (Exception ex) {
 			throw log.unableToStartDatastoreProvider( ex );
@@ -237,7 +230,7 @@ implements Startable, Stoppable, ServiceRegistryAwareService, Configurable {
 				IgniteConfigurationBuilder configBuilder = config.getConfigBuilderClass().newInstance();
 				conf = configBuilder.build();
 			}
-			catch (InstantiationException | IllegalAccessException ex) {
+			catch (Exception ex) {
 				throw log.unableToStartDatastoreProvider( ex );
 			}
 		}
@@ -336,6 +329,7 @@ implements Startable, Stoppable, ServiceRegistryAwareService, Configurable {
 	 */
 	private static class ComputeForLocalQueries<T> implements IgniteCallable<List<T>> {
 
+		private static final long serialVersionUID = 1L;
 		private final String cacheName;
 		private final SqlFieldsQuery query;
 		@IgniteInstanceResource
@@ -476,9 +470,9 @@ implements Startable, Stoppable, ServiceRegistryAwareService, Configurable {
 					}
 				}
 				if ( result == null ) { */
-					//if nothing found we use id field name
-					result = StringHelper.stringBeforePoint( keyMetadata.getColumnNames()[0] );
-					result = StringUtils.capitalize( result );
+				//if nothing found we use id field name
+				result = StringHelper.stringBeforePoint( keyMetadata.getColumnNames()[0] );
+				result = StringUtils.capitalize( result );
 				//}
 			}
 			compositeIdTypes.put( keyMetadata.getTable(), result );
